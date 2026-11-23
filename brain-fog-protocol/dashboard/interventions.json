@@ -1,0 +1,245 @@
+[
+{
+"name": "Самопроверка (retrieval) при учёбе",
+"category": "обучение",
+"effect": 0.4,
+"effect_type": "d (перенос)",
+"level": "A (удержание); B (перенос)",
+"verdict": "внедрить",
+"pmids": "25150680, 29733621"
+},
+{
+"name": "Интервальное повторение (SRS)",
+"category": "обучение",
+"effect": 0.54,
+"effect_type": "d",
+"level": "A",
+"verdict": "внедрить",
+"pmids": "16719566, 40564553"
+},
+{
+"name": "Тусклый вечер, тёмная спальня",
+"category": "сон/свет",
+"effect": null,
+"effect_type": "",
+"level": "B",
+"verdict": "внедрить",
+"pmids": "31138694, 35298459"
+},
+{
+"name": "Перерывы 5–10 мин каждые 25–60 мин ⚙",
+"category": "внимание",
+"effect": 0.36,
+"effect_type": "d (бодрость)",
+"level": "B",
+"verdict": "внедрить",
+"pmids": "36044424, 40723645"
+},
+{
+"name": "Проветривание / CO2 <1000 ppm ⚙",
+"category": "среда",
+"effect": null,
+"effect_type": "",
+"level": "B− / C",
+"verdict": "внедрить",
+"pmids": "32557862, 35330988"
+},
+{
+"name": "Дневной сон 10–20 мин",
+"category": "сон",
+"effect": 0.18,
+"effect_type": "g",
+"level": "B",
+"verdict": "опционально",
+"pmids": "34639511"
+},
+{
+"name": "Яркий свет после обеда",
+"category": "свет",
+"effect": null,
+"effect_type": "",
+"level": "C",
+"verdict": "опционально",
+"pmids": "26016658"
+},
+{
+"name": "Майндфулнес 10–20 мин",
+"category": "стресс/внимание",
+"effect": 0.2,
+"effect_type": "≈ (тип не указан)",
+"level": "A (малый)",
+"verdict": "опционально",
+"pmids": "37578065"
+},
+{
+"name": "Природа ≥20 мин 2–3 раза в неделю",
+"category": "восстановление",
+"effect": null,
+"effect_type": "",
+"level": "A−",
+"verdict": "опционально",
+"pmids": "30130463"
+},
+{
+"name": "L-теанин + кофеин",
+"category": "вещества",
+"effect": null,
+"effect_type": "",
+"level": "C",
+"verdict": "опционально",
+"pmids": "24946991"
+},
+{
+"name": "Умеренная нагрузка 10–20 мин перед работой",
+"category": "движение",
+"effect": 0.097,
+"effect_type": "g",
+"level": "B (малый)",
+"verdict": "опционально",
+"pmids": "22480735, 36212191"
+},
+{
+"name": "Стоячий стол",
+"category": "среда",
+"effect": null,
+"effect_type": "",
+"level": "C",
+"verdict": "опционально",
+"pmids": "29495542"
+},
+{
+"name": "NSDR / йога-нидра",
+"category": "восстановление",
+"effect": null,
+"effect_type": "",
+"level": "D (когниция)",
+"verdict": "опционально",
+"pmids": "41144325"
+},
+{
+"name": "Не ставить ключевую интервальную тренировку после 4–6 ч ⚙ умственной работы",
+"category": "движение",
+"effect": 0.08,
+"effect_type": "d_z (после поправки, н.з.)",
+"level": "C–D",
+"verdict": "опционально",
+"pmids": "28044281, 33103052"
+},
+{
+"name": "Креатин 3–5 г, всеядные 18–50",
+"category": "вещества",
+"effect": 0.03,
+"effect_type": "SMD",
+"level": "D",
+"verdict": "не делать",
+"pmids": "35984306, 39070254"
+},
+{
+"name": "Креатин при недосыпе",
+"category": "вещества",
+"effect": null,
+"effect_type": "",
+"level": "C",
+"verdict": "не делать",
+"pmids": "38418482"
+},
+{
+"name": "Модафинил",
+"category": "фармакология",
+"effect": 0.12,
+"effect_type": "SMD",
+"level": "B (малый)",
+"verdict": "не делать",
+"pmids": "32709551"
+},
+{
+"name": "Метилфенидат",
+"category": "фармакология",
+"effect": 0.21,
+"effect_type": "SMD",
+"level": "B (малый)",
+"verdict": "не делать",
+"pmids": "32709551"
+},
+{
+"name": "d-амфетамин",
+"category": "фармакология",
+"effect": 0,
+"effect_type": "SMD",
+"level": "B (нулевой)",
+"verdict": "не делать",
+"pmids": "32709551"
+},
+{
+"name": "HD-tDCS / tDCS дома",
+"category": "технологии",
+"effect": 0.23,
+"effect_type": "g (н.з., рабочая память)",
+"level": "D",
+"verdict": "не делать",
+"pmids": "36371009, 37224229"
+},
+{
+"name": "Бинауральные ритмы",
+"category": "технологии",
+"effect": 0.45,
+"effect_type": "g (разнородные исходы)",
+"level": "D (когниция)",
+"verdict": "не делать",
+"pmids": "30073406, 37205669, 42349368"
+},
+{
+"name": "Какао-флаванолы",
+"category": "вещества",
+"effect": 0,
+"effect_type": "остро (РКИ)",
+"level": "D (остро); C (хронически)",
+"verdict": "не делать",
+"pmids": "40614481, 42878033, 37211619"
+},
+{
+"name": "Нитраты / свекольный сок",
+"category": "вещества",
+"effect": null,
+"effect_type": "",
+"level": "C–D",
+"verdict": "не делать",
+"pmids": "26037632, 42739013"
+},
+{
+"name": "Омега-3 при рыбе в рационе",
+"category": "вещества",
+"effect": null,
+"effect_type": "",
+"level": "D",
+"verdict": "не делать",
+"pmids": "26040902"
+},
+{
+"name": "Низкий ГИ ради ясности",
+"category": "питание",
+"effect": 0.13,
+"effect_type": "ES (дети)",
+"level": "D (перенос)",
+"verdict": "не делать",
+"pmids": "31344892"
+},
+{
+"name": "Конспект от руки как «усилитель»",
+"category": "обучение",
+"effect": null,
+"effect_type": "",
+"level": "D",
+"verdict": "не делать",
+"pmids": "33539228"
+},
+{
+"name": "Dual-task-упражнения «для ума»",
+"category": "движение",
+"effect": null,
+"effect_type": "",
+"level": "D (для здоровых)",
+"verdict": "не делать",
+"pmids": "35543010"
+}
+]

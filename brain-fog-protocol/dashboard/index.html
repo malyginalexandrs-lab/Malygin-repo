@@ -1,0 +1,360 @@
+<meta name="dash-one-writer">
+<style>
+.bf{display:flex;flex-direction:column;gap:var(--cds-gap-xl);font-family:var(--font-anthropic-sans);color:var(--color-fg)}
+.bf h1{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);margin:0;text-wrap:balance}
+.bf h2{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin:0 0 var(--cds-gap-sm);text-wrap:balance}
+.bf p{margin:0;line-height:1.5;max-width:72ch}
+.bf .muted{color:var(--color-fg-muted);font-size:var(--cds-font-size-caption)}
+.bf .lede{font-size:var(--cds-font-size-body)}
+.bf .card{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:var(--cds-pad-lg);min-width:0}
+.bf .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--cds-gap-md)}
+.bf .kpi .v{font-family:var(--font-anthropic-serif);font-weight:400;font-size:2.2rem;font-variant-numeric:tabular-nums;line-height:1.1}
+.bf .kpi .l{color:var(--color-fg-muted);font-size:var(--cds-font-size-caption)}
+.bf .top5{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--cds-gap-md);list-style:none;margin:0;padding:0}
+.bf .top5 li{display:flex;flex-direction:column;gap:var(--cds-gap-sm)}
+.bf .rank{font-family:var(--font-anthropic-serif);font-size:1.6rem;color:var(--color-fg-muted)}
+.bf .m{font-weight:var(--cds-font-weight-medium);line-height:1.4}
+.bf .pill{display:inline-block;padding:1px 8px;border-radius:999px;font-size:var(--cds-font-size-caption);border:1px solid var(--color-border-line);white-space:nowrap}
+.bf .v-in{color:var(--color-ok);border-color:var(--color-ok)}
+.bf .v-opt{color:var(--color-warn);border-color:var(--color-warn)}
+.bf .v-no{color:var(--color-bad);border-color:var(--color-bad)}
+.bf .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:var(--cds-gap-md)}
+.bf .chart{position:relative;min-height:220px}
+.bf .chart svg text{fill:var(--cds-text-secondary);font-size:11px}
+.bf .tip{position:absolute;pointer-events:none;background:var(--cds-surface-popover);border:1px solid var(--cds-border);box-shadow:var(--cds-shadow-popover);border-radius:var(--cds-radius);padding:6px 8px;font-size:var(--cds-font-size-caption);max-width:260px;z-index:2}
+.bf .tw{overflow-x:auto}
+.bf table{border-collapse:collapse;width:100%;font-size:var(--cds-font-size-caption)}
+.bf th,.bf td{text-align:left;vertical-align:top;padding:6px 8px;border-bottom:1px solid var(--color-border-line)}
+.bf th{color:var(--color-fg-muted);font-weight:var(--cds-font-weight-medium)}
+.bf td.num{font-variant-numeric:tabular-nums;text-align:right}
+.bf .week{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:var(--cds-gap-sm)}
+.bf .day h3{margin:0 0 6px;font-size:var(--cds-font-size-body)}
+.bf .day ul{margin:0;padding-left:1.1em;font-size:var(--cds-font-size-caption);line-height:1.45}
+.bf .lists{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--cds-gap-md)}
+.bf .lists ol{margin:0;padding-left:1.2em;line-height:1.45;font-size:var(--cds-font-size-caption)}
+.bf .lists li+li{margin-top:6px}
+.bf .gate{border-left:3px solid var(--color-bad)}
+.bf .filters{display:flex;gap:var(--cds-gap-sm);align-items:center;flex-wrap:wrap;margin-bottom:var(--cds-gap-sm)}
+</style>
+
+<div class="bf">
+  <header id="head">
+    <p class="muted">Финальный протокол v3.1 · 3 цикла · 23.11.2026</p>
+    <h1>Протокол ясности мышления</h1>
+    <p class="lede">Для здоровых людей, которые уже тренируются, едят по-средиземноморски и спят 7–8 ч. Добавки и стимуляторы у них дают около 0–0,2 SD. Главный резерв — убрать эпизодические потери (алкоголь, перегрузка, сдвиг сна, душная комната) и защитить блоки глубокой работы. Цель — меньше плохих дней, а не прирост IQ.</p>
+  </header>
+
+  <section id="kpis" class="kpis" aria-label="Итоги работы агентов">
+    <div class="card kpi"><div class="v" data-draw="k-edits" data-source="totals" data-field="edits" data-row="0">—</div><div class="l">правок критиков за 3 цикла</div></div>
+    <div class="card kpi"><div class="v" data-draw="k-crit" data-source="totals" data-field="critical" data-row="0">—</div><div class="l">из них критичных</div></div>
+    <div class="card kpi"><div class="v" data-draw="k-pmid" data-source="totals" data-field="pmid" data-row="0">—</div><div class="l">проверок PMID</div></div>
+    <div class="card kpi"><div class="v" data-draw="k-disc" data-source="totals" data-field="disc" data-row="0">—</div><div class="l">расхождений найдено и исправлено</div></div>
+  </section>
+
+  <section id="top5-sec">
+    <h2>Топ-5 мер с наибольшей отдачей</h2>
+    <ol class="top5" data-draw="top5" data-source="top5"></ol>
+  </section>
+
+  <section id="gate-sec" class="card gate">
+    <h2>Шлюз безопасности: когда это не про оптимизацию</h2>
+    <p class="muted">Если пункт срабатывает, протокол для здоровых не применяется. Дальше действует клинический протокол v2.1.</p>
+    <ol data-draw="gate" data-source="notes"></ol>
+  </section>
+
+  <section id="triggers-sec">
+    <h2>Триггеры эпизодического тумана</h2>
+    <p class="muted">Открывать в день тумана, а не заполнять ежедневно. ⚙ — эвристика редактора без PMID.</p>
+    <div class="tw">
+      <table data-source="triggers" data-row-key="n">
+        <thead><tr><th data-field="n">№</th><th data-field="trigger">Триггер</th><th data-field="rule">Правило</th><th data-field="level">Уровень</th><th data-field="pmids">PMID</th></tr></thead>
+        <tbody data-draw="triggers"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="interventions-sec">
+    <h2>Что внедрить, что опционально, чего не делать</h2>
+    <div class="two">
+      <div class="card">
+        <p class="muted">Величина эффекта там, где она есть. Метрики разные (d, g, SMD) и в разных популяциях, поэтому сравнивайте порядок величины, а не точные значения.</p>
+        <div class="chart" data-draw="effects" data-source="interventions"></div>
+      </div>
+      <div class="card" style="min-width:0">
+        <div class="filters">
+          <label for="verdict-filter" class="muted">Показать</label>
+          <select id="verdict-filter" class="dash-select">
+            <option value="">Все меры</option>
+            <option value="внедрить">Внедрить</option>
+            <option value="опционально">Опционально</option>
+            <option value="не делать">Не делать</option>
+          </select>
+        </div>
+        <div class="tw">
+          <table data-source="interventions" data-row-key="name">
+            <thead><tr><th data-field="name">Мера</th><th data-field="verdict">Вердикт</th><th data-field="level">Уровень</th><th data-field="pmids">PMID</th></tr></thead>
+            <tbody data-draw="interventions"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="week-sec">
+    <h2>Недельный план</h2>
+    <div class="week" data-draw="week" data-source="plan"></div>
+    <ul class="muted" data-draw="week-notes" data-source="notes" style="margin-top:var(--cds-gap-sm)"></ul>
+  </section>
+
+  <section id="measure-sec">
+    <h2>Измерение на себе</h2>
+    <div class="two">
+      <div class="card">
+        <ol data-draw="measure" data-source="notes" class="muted" style="margin:0;padding-left:1.2em;line-height:1.5"></ol>
+      </div>
+      <div class="card">
+        <p class="muted">Эксперимент n-of-1: доля случаев, в которых правило решения засчитает эффект. Блоки ABAB по 2 недели, PVT-B 5 дней в неделю. Симуляция, 200 000 повторов, дни независимы (при автокорреляции ложных тревог больше).</p>
+        <div class="chart" data-draw="power" data-source="power"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lists-sec" class="lists">
+    <div class="card"><h2>Чего не делать</h2><ol data-draw="notdo" data-source="notes"></ol></div>
+    <div class="card"><h2>Ограничения и потолок</h2><ol data-draw="limits" data-source="notes"></ol></div>
+  </section>
+
+  <section id="cycles-sec">
+    <h2>Как работали агенты</h2>
+    <p class="muted">Исследователь ищет, критик опровергает и сверяет PMID, редактор вносит правки и проводит голосование. После цикла 2 роли ротировали, а цель сузили до здоровых с ЗОЖ.</p>
+    <div class="two">
+      <div class="card"><div class="chart" data-draw="edits-chart" data-source="cycles"></div></div>
+      <div class="card">
+        <p class="muted">Голосование цикла 3 по спорным решениям</p>
+        <div class="tw">
+          <table data-source="votes" data-row-key="id">
+            <thead><tr><th data-field="id">Вопрос</th><th data-field="result">Итог</th><th data-field="score">Счёт</th></tr></thead>
+            <tbody data-draw="votes"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="tw" style="margin-top:var(--cds-gap-md)">
+      <table data-source="cycles" data-row-key="cycle">
+        <thead><tr><th data-field="cycle">Цикл</th><th data-field="focus">Фокус</th><th data-field="roles">Роли</th><th data-field="rotation">Ротация</th><th data-field="edits_total">Правок</th><th data-field="pmid_checked">PMID</th><th data-field="accepted">Принято</th><th data-field="modified">С изм.</th><th data-field="rejected">Откл.</th><th data-field="vote_summary">Голосование</th><th data-field="output">Итог</th></tr></thead>
+        <tbody data-draw="cycles"></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script>
+dash.calc('totals', {
+  title: 'Итоги трёх циклов',
+  description: 'Суммы правок, критичных правок, проверок PMID и расхождений по трём циклам',
+  inputs: ['cycles'],
+  fn: (cycles) => {
+    const s = (k) => cycles.reduce((a, r) => a + (+r[k] || 0), 0);
+    return [{edits: s('edits_total'), critical: s('critical'), pmid: s('pmid_checked'), disc: s('pmid_discrepancies')}];
+  }
+});
+</script>
+
+<script>
+(function () {
+  const fmt = (v) => (v == null ? '—' : String(v));
+  [['k-edits', 'edits'], ['k-crit', 'critical'], ['k-pmid', 'pmid'], ['k-disc', 'disc']].forEach(([name, f]) => {
+    dash.draw(name, (el) => {
+      const t = dash.data('totals');
+      el.textContent = t.status === 'ok' && t.data && t.data[0] ? fmt(t.data[0][f]) : '—';
+    });
+  });
+
+  const vClass = (v) => (v === 'внедрить' ? 'v-in' : v === 'опционально' ? 'v-opt' : 'v-no');
+  const mk = (tag, text, cls) => { const e = document.createElement(tag); if (text != null) e.textContent = text; if (cls) e.className = cls; return e; };
+
+  dash.draw('top5', (el) => {
+    const d = dash.data('top5');
+    el.replaceChildren();
+    if (d.status !== 'ok') { el.appendChild(mk('li', d.status === 'error' ? 'Не удалось загрузить топ-5.' : '—')); return; }
+    d.data.slice().sort((a, b) => a.rank - b.rank).forEach((r, i) => {
+      const li = mk('li', null, 'card');
+      li.appendChild(mk('div', String(r.rank), 'rank'));
+      const m = mk('div', r.measure, 'm'); m.dataset.source = 'top5'; m.dataset.field = 'measure'; m.dataset.where = 'rank=' + r.rank; li.appendChild(m);
+      li.appendChild(mk('p', r.why, 'muted'));
+      const meta = mk('div', null); meta.style.display = 'flex'; meta.style.gap = '6px'; meta.style.flexWrap = 'wrap';
+      meta.appendChild(mk('span', r.level, 'pill'));
+      meta.appendChild(mk('span', 'PMID ' + r.pmids, 'muted'));
+      li.appendChild(meta);
+      el.appendChild(li);
+    });
+  });
+
+  const listFrom = (section) => (el) => {
+    const d = dash.data('notes');
+    el.replaceChildren();
+    if (d.status !== 'ok') { el.appendChild(mk('li', d.status === 'error' ? 'Не удалось загрузить.' : '—')); return; }
+    d.data.filter((r) => r.section === section).sort((a, b) => a.n - b.n).forEach((r) => el.appendChild(mk('li', r.text)));
+  };
+  dash.draw('gate', listFrom('Шлюз безопасности'));
+  dash.draw('notdo', listFrom('Чего не делать'));
+  dash.draw('limits', listFrom('Ограничения'));
+  dash.draw('week-notes', listFrom('Заметки к плану'));
+  dash.draw('measure', listFrom('Измерение'));
+
+  dash.draw('triggers', (el) => {
+    const d = dash.data('triggers');
+    el.replaceChildren();
+    if (d.status !== 'ok') { const tr = mk('tr'); const td = mk('td', d.status === 'error' ? 'Не удалось загрузить триггеры.' : '—'); td.colSpan = 5; tr.appendChild(td); el.appendChild(tr); return; }
+    d.data.slice().sort((a, b) => a.n - b.n).forEach((r) => {
+      const tr = mk('tr');
+      tr.appendChild(mk('td', String(r.n), 'num'));
+      tr.appendChild(mk('td', r.trigger));
+      tr.appendChild(mk('td', r.rule));
+      tr.appendChild(mk('td', r.level));
+      tr.appendChild(mk('td', r.pmids));
+      el.appendChild(tr);
+    });
+  });
+
+  const sel = document.querySelectorAll('#verdict-filter');
+  sel.forEach((s) => s.addEventListener('change', () => dash.draw('interventions')));
+
+  dash.draw('interventions', (el) => {
+    const d = dash.data('interventions');
+    el.replaceChildren();
+    if (d.status !== 'ok') { const tr = mk('tr'); const td = mk('td', d.status === 'error' ? 'Не удалось загрузить меры.' : '—'); td.colSpan = 4; tr.appendChild(td); el.appendChild(tr); return; }
+    const s = document.querySelector('#verdict-filter');
+    const want = s ? s.value : '';
+    const order = {'внедрить': 0, 'опционально': 1, 'не делать': 2};
+    d.data.filter((r) => !want || r.verdict === want).sort((a, b) => order[a.verdict] - order[b.verdict]).forEach((r) => {
+      const tr = mk('tr');
+      tr.appendChild(mk('td', r.name));
+      const tv = mk('td'); tv.appendChild(mk('span', r.verdict, 'pill ' + vClass(r.verdict))); tr.appendChild(tv);
+      tr.appendChild(mk('td', r.level));
+      tr.appendChild(mk('td', r.pmids));
+      el.appendChild(tr);
+    });
+  });
+
+  dash.draw('effects', (el) => {
+    const d = dash.data('interventions');
+    el.replaceChildren();
+    if (d.status !== 'ok') { el.textContent = d.status === 'error' ? 'Не удалось загрузить эффекты.' : '—'; return; }
+    const rows = d.data.filter((r) => r.effect != null && r.effect !== '').map((r) => Object.assign({}, r, {e: +r.effect})).sort((a, b) => b.e - a.e);
+    const W = Math.max(280, el.clientWidth || 320), bh = 22, top = 8, H = top + rows.length * bh + 24;
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img')
+      .attr('aria-label', 'Величина эффекта мер: столбцы, цвет по вердикту');
+    const labelW = Math.min(170, W * 0.42);
+    const x = d3.scaleLinear().domain([0, Math.max(0.6, d3.max(rows, (r) => r.e))]).range([labelW, W - 40]);
+    svg.append('g').attr('transform', `translate(0,${H - 20})`).call(d3.axisBottom(x).ticks(4).tickFormat(d3.format('.1f')))
+      .call((g) => g.select('.domain').style('stroke', 'var(--cds-chart-axis)')).call((g) => g.selectAll('line').style('stroke', 'var(--cds-chart-axis)'));
+    const col = {'внедрить': 'var(--color-ok)', 'опционально': 'var(--color-warn)', 'не делать': 'var(--color-bad)'};
+    const tip = d3.select(el).append('div').attr('class', 'tip').style('display', 'none');
+    const g = svg.selectAll('g.r').data(rows).join('g').attr('class', 'r').attr('transform', (r, i) => `translate(0,${top + i * bh})`);
+    g.append('text').attr('x', labelW - 6).attr('y', bh / 2 + 4).attr('text-anchor', 'end')
+      .text((r) => (r.name.length > 26 ? r.name.slice(0, 25) + '…' : r.name));
+    g.append('rect').attr('x', x(0)).attr('y', 4).attr('height', bh - 8).attr('width', (r) => Math.max(1, x(r.e) - x(0))).style('fill', (r) => col[r.verdict]);
+    g.append('text').attr('x', (r) => x(r.e) + 4).attr('y', bh / 2 + 4).text((r) => d3.format('.2f')(r.e).replace('.', ','));
+    g.on('mousemove', (ev, r) => {
+      const [mx, my] = d3.pointer(ev, el);
+      tip.style('display', null).style('left', Math.min(mx + 10, W - 260) + 'px').style('top', (my + 10) + 'px');
+      tip.text(`${r.name}: ${String(r.e).replace('.', ',')} ${r.effect_type} · ${r.verdict} · уровень ${r.level}`);
+    }).on('mouseleave', () => tip.style('display', 'none'));
+  });
+
+  dash.draw('week', (el) => {
+    const d = dash.data('plan');
+    el.replaceChildren();
+    if (d.status !== 'ok') { el.textContent = d.status === 'error' ? 'Не удалось загрузить план.' : '—'; return; }
+    const days = [];
+    d.data.forEach((r) => { if (!days.includes(r.day)) days.push(r.day); });
+    days.forEach((day) => {
+      const c = mk('div', null, 'card day');
+      c.appendChild(mk('h3', day));
+      const ul = mk('ul');
+      d.data.filter((r) => r.day === day).sort((a, b) => a.order - b.order).forEach((r) => ul.appendChild(mk('li', r.item)));
+      c.appendChild(ul);
+      el.appendChild(c);
+    });
+  });
+
+  dash.draw('power', (el) => {
+    const d = dash.data('power');
+    el.replaceChildren();
+    if (d.status !== 'ok') { el.textContent = d.status === 'error' ? 'Не удалось загрузить мощность.' : '—'; return; }
+    const rows = d.data.slice().sort((a, b) => a.delta - b.delta);
+    const W = Math.max(280, el.clientWidth || 320), H = 220, m = {l: 36, r: 10, t: 16, b: 36};
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img')
+      .attr('aria-label', 'Доля срабатываний правила решения при разной истинной величине эффекта');
+    const x = d3.scaleBand().domain(rows.map((r) => r.label)).range([m.l, W - m.r]).padding(0.3);
+    const y = d3.scaleLinear().domain([0, 100]).range([H - m.b, m.t]);
+    svg.append('g').selectAll('line').data([25, 50, 75, 100]).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y).attr('y2', y).style('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickFormat((v) => v + '%')).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickFormat((l) => (l.startsWith('Нет') ? 'нет эффекта' : l))).call((g) => g.select('.domain').style('stroke', 'var(--cds-chart-axis)'));
+    svg.selectAll('rect.b').data(rows).join('rect').attr('class', 'b').attr('x', (r) => x(r.label)).attr('width', x.bandwidth())
+      .attr('y', (r) => y(r.pct)).attr('height', (r) => y(0) - y(r.pct)).style('fill', (r) => (r.delta === 0 ? 'var(--cds-chart-status-critical)' : dash.colors[0]));
+    svg.selectAll('text.v').data(rows).join('text').attr('class', 'v').attr('x', (r) => x(r.label) + x.bandwidth() / 2).attr('y', (r) => y(r.pct) - 4)
+      .attr('text-anchor', 'middle').text((r) => r.pct + '%');
+  });
+
+  dash.draw('edits-chart', (el) => {
+    const d = dash.data('cycles');
+    el.replaceChildren();
+    if (d.status !== 'ok') { el.textContent = d.status === 'error' ? 'Не удалось загрузить циклы.' : '—'; return; }
+    const keys = [['critical', 'критичные'], ['important', 'важные'], ['minor', 'мелкие']];
+    const rows = d.data.slice().sort((a, b) => a.cycle - b.cycle);
+    const W = Math.max(280, el.clientWidth || 320), H = 220, m = {l: 30, r: 10, t: 28, b: 30};
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img')
+      .attr('aria-label', 'Правки критиков по циклам и тяжести');
+    const x = d3.scaleBand().domain(rows.map((r) => 'Цикл ' + r.cycle)).range([m.l, W - m.r]).padding(0.35);
+    const y = d3.scaleLinear().domain([0, d3.max(rows, (r) => +r.edits_total) || 1]).nice().range([H - m.b, m.t]);
+    const st = d3.stack().keys(keys.map((k) => k[0]))(rows.map((r) => ({c: 'Цикл ' + r.cycle, critical: +r.critical, important: +r.important, minor: +r.minor})));
+    svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4)).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x)).call((g) => g.select('.domain').style('stroke', 'var(--cds-chart-axis)'));
+    const cols = [dash.colors[0], dash.colors[1], dash.colors[2]];
+    st.forEach((layer, i) => {
+      svg.append('g').selectAll('rect').data(layer).join('rect').attr('x', (p) => x(p.data.c)).attr('width', x.bandwidth())
+        .attr('y', (p) => y(p[1])).attr('height', (p) => y(p[0]) - y(p[1])).style('fill', cols[i]);
+    });
+    svg.selectAll('text.t').data(rows).join('text').attr('class', 't').attr('x', (r) => x('Цикл ' + r.cycle) + x.bandwidth() / 2)
+      .attr('y', (r) => y(+r.edits_total) - 4).attr('text-anchor', 'middle').text((r) => r.edits_total);
+    const lg = svg.append('g').attr('transform', `translate(${m.l},10)`);
+    let off = 0;
+    keys.forEach((k, i) => {
+      const gg = lg.append('g').attr('transform', `translate(${off},0)`);
+      gg.append('rect').attr('width', 10).attr('height', 10).attr('y', -8).style('fill', cols[i]);
+      const t = gg.append('text').attr('x', 14).text(k[1]);
+      off += 14 + (t.node().getComputedTextLength() || 60) + 12;
+    });
+  });
+
+  dash.draw('votes', (el) => {
+    const d = dash.data('votes');
+    el.replaceChildren();
+    if (d.status !== 'ok') { const tr = mk('tr'); const td = mk('td', d.status === 'error' ? 'Не удалось загрузить голоса.' : '—'); td.colSpan = 3; tr.appendChild(td); el.appendChild(tr); return; }
+    d.data.forEach((r) => {
+      const tr = mk('tr');
+      tr.appendChild(mk('td', r.id)); tr.appendChild(mk('td', r.result)); tr.appendChild(mk('td', r.score, 'num'));
+      el.appendChild(tr);
+    });
+  });
+
+  dash.draw('cycles', (el) => {
+    const d = dash.data('cycles');
+    el.replaceChildren();
+    if (d.status !== 'ok') { const tr = mk('tr'); const td = mk('td', d.status === 'error' ? 'Не удалось загрузить циклы.' : '—'); td.colSpan = 11; tr.appendChild(td); el.appendChild(tr); return; }
+    d.data.slice().sort((a, b) => a.cycle - b.cycle).forEach((r) => {
+      const tr = mk('tr');
+      tr.appendChild(mk('td', String(r.cycle), 'num'));
+      tr.appendChild(mk('td', r.focus));
+      tr.appendChild(mk('td', r.roles));
+      tr.appendChild(mk('td', r.rotation));
+      ['edits_total', 'pmid_checked', 'accepted', 'modified', 'rejected'].forEach((k) => tr.appendChild(mk('td', String(r[k]), 'num')));
+      tr.appendChild(mk('td', r.vote_summary));
+      tr.appendChild(mk('td', r.output));
+      el.appendChild(tr);
+    });
+  });
+})();
+</script>

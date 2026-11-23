@@ -1,0 +1,44 @@
+[
+{
+"cycle": 3,
+"id": "С1",
+"result": "А",
+"score": "3:0"
+},
+{
+"cycle": 3,
+"id": "С2",
+"result": "А с поправкой",
+"score": "2:1"
+},
+{
+"cycle": 3,
+"id": "С3",
+"result": "Б",
+"score": "2:1"
+},
+{
+"cycle": 3,
+"id": "С4",
+"result": "А",
+"score": "3:0"
+},
+{
+"cycle": 3,
+"id": "С5",
+"result": "А",
+"score": "3:0"
+},
+{
+"cycle": 3,
+"id": "С6",
+"result": "Б",
+"score": "2:1"
+},
+{
+"cycle": 3,
+"id": "С7",
+"result": "А",
+"score": "3:0"
+}
+]
