@@ -1,0 +1,388 @@
+<meta name="dash-one-writer">
+<style>
+.sg { display: flex; flex-direction: column; gap: var(--cds-gap-xl); max-width: 1100px; }
+.sg h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.sg h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-sm); text-wrap: balance; }
+.sg p { margin: 0; max-width: 70ch; line-height: 1.5; }
+.sg-muted { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.sg-lede { font-size: var(--cds-font-size-body); }
+.sg-lede b { font-variant-numeric: tabular-nums; }
+.sg-banner { display: inline-flex; align-items: center; gap: var(--cds-gap-sm); padding: var(--cds-pad-xs) var(--cds-pad-md); border-radius: 999px; border: 1px solid var(--color-ok); color: var(--color-ok); font-size: var(--cds-font-size-caption); font-weight: var(--cds-font-weight-medium); width: fit-content; }
+.sg-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--cds-gap-md); }
+.sg-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
+.sg-kpi-num { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: 2.4rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.sg-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--cds-gap-md); }
+.sg-step { border-top: 3px solid var(--sg-c, var(--color-border-line)); background: var(--color-panel); border-radius: 0 0 var(--cds-radius) var(--cds-radius); padding: var(--cds-pad-md); display: flex; flex-direction: column; gap: var(--cds-gap-xs); min-width: 0; }
+.sg-step h3 { margin: 0; font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); }
+.sg-step ul, .sg-flags ul { margin: 0; padding-left: 1.1em; line-height: 1.45; }
+.sg-step .sg-when { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.sg-chartbox { position: relative; min-height: 340px; }
+.sg-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); font-size: var(--cds-font-size-caption); max-width: 280px; z-index: 2; }
+.sg-tip ul { margin: 4px 0 0; padding-left: 1em; }
+.sg-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.sg-legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; background: var(--sg-c); }
+.sg-axis text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); }
+.sg-axis line, .sg-axis path { stroke: var(--cds-chart-axis); }
+.sg-grid line { stroke: var(--cds-chart-grid); }
+.sg-zone { fill: var(--color-ok); opacity: 0.07; }
+.sg-tablewrap { overflow-x: auto; }
+.sg-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); }
+.sg-table th, .sg-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+.sg-table th { font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); white-space: nowrap; }
+.sg-table td.sg-score { text-align: center; font-variant-numeric: tabular-nums; font-weight: var(--cds-font-weight-medium); min-width: 3.2em; border-radius: 4px; }
+.sg-table td.sg-name { font-weight: var(--cds-font-weight-medium); min-width: 12em; }
+.sg-table td.sg-note { min-width: 16em; color: var(--color-fg-muted); }
+.sg-table tr.sg-avoid td.sg-name { color: var(--color-bad); }
+.sg-table a { color: inherit; }
+.sg-controls { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); align-items: center; margin-bottom: var(--cds-gap-sm); }
+.sg-flags { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--cds-gap-md); }
+.sg-flag-urgent { border-left: 3px solid var(--color-bad); }
+.sg-flag-avoid { border-left: 3px solid var(--color-warn); }
+.sg-ok { color: var(--color-ok); font-weight: var(--cds-font-weight-medium); }
+.sg-bad { color: var(--color-bad); font-weight: var(--cds-font-weight-medium); }
+.sg details summary { cursor: pointer; font-weight: var(--cds-font-weight-medium); }
+</style>
+
+<div class="sg" data-read lang="ru">
+  <header id="sg-head" style="display:flex;flex-direction:column;gap:var(--cds-gap-sm)">
+    <span class="sg-banner">✓ Консенсус: агенты A, B, C приняли протокол</span>
+    <h1>Тяжёлый ССГ после факотрабекулэктомии</h1>
+    <p class="sg-lede">Протокол восстановления роговицы и конъюнктивы при функционирующей ММС-подушке. Из <b data-draw="k-total" data-source="summary" data-field="total" data-row="0">—</b> оценённых средств протокола <b data-draw="k-safe" data-source="summary" data-field="safe" data-row="0">—</b> безопасны для подушки (оценка ≥ 4 из 5), а <b data-draw="k-avoid" data-source="summary" data-field="avoid" data-row="0">—</b> метода лучше не применять.</p>
+    <p class="sg-muted">Это обзор доказательств, а не назначение. Решения принимает офтальмолог вместе с оперировавшим глаукоматологом. РКИ лечения развившегося тяжёлого ССГ у пациентов с подушкой нет; поправки «на подушку» — экстраполяция.</p>
+  </header>
+
+  <section id="sg-answer" class="sg-card">
+    <h2>Ответ</h2>
+    <p>Работает не одно средство, а комбинация: отмена консерванта БАК → лубрикация без консерванта → циклоспорин с коротким PF-стероидом → <b>аутологичная сыворотка 20%</b> (или PRP) как главное регенеративное средство. При тяжёлой форме (Oxford ≥ 4, дефект эпителия, NK, ЛСКН) сыворотку начинают сразу. Затем добавляют средство под выявленную причину.</p>
+  </section>
+
+  <section id="sg-steps">
+    <h2>Протокол по шагам</h2>
+    <div class="sg-steps">
+      <div class="sg-step" style="--sg-c: var(--color-fg-muted)">
+        <h3>Шаг 0 · Найти причину</h3>
+        <span class="sg-when">Первый визит</span>
+        <ul>
+          <li>Тест Зейделя, осмотр на блебит</li>
+          <li>Фото подушки, AS-OCT: высота, микрокисты, деллен</li>
+          <li>Эстезиометрия (NK)</li>
+          <li>Признаки ЛСКН у лимба</li>
+          <li>Веки, ДМЖ; ревизия всех капель</li>
+          <li>Исходное и целевое ВГД</li>
+        </ul>
+      </div>
+      <div class="sg-step" style="--sg-c: var(--sg-c1)">
+        <h3>Шаг 1 · Основа</h3>
+        <span class="sg-when">Сразу, у всех</span>
+        <ul>
+          <li>Отменить всё с БАК, НПВС-капли; гипотензивные только без консерванта</li>
+          <li>PF гиалуроновая кислота ± трегалоза, на ночь гель</li>
+          <li>Веки: только нижнее; IPL ниже нижнего века</li>
+        </ul>
+      </div>
+      <div class="sg-step" style="--sg-c: var(--sg-c2)">
+        <h3>Шаг 2 · Воспаление</h3>
+        <span class="sg-when">Вместе с шагом 1</span>
+        <ul>
+          <li>Циклоспорин 0,1% на ночь, ≥ 6 мес.</li>
+          <li>PF-стероид ≤ 2–4 нед. с отменой, ВГД через 1–2 нед.</li>
+        </ul>
+      </div>
+      <div class="sg-step" style="--sg-c: var(--sg-c3)">
+        <h3>Шаг 3 · Регенерация</h3>
+        <span class="sg-when">Сразу при тяжёлой форме, иначе через 4–8 нед.</span>
+        <ul>
+          <li>Аутосыворотка 20% / PRP, однодозовые замороженные флаконы</li>
+          <li>Размороженный флакон — выбросить в конце дня</li>
+          <li>ВГД и подушка через 2–4 нед.</li>
+        </ul>
+      </div>
+      <div class="sg-step" style="--sg-c: var(--sg-c4)">
+        <h3>Шаг 4 · По причине</h3>
+        <span class="sg-when">Добавляется к шагам 1–3</span>
+        <ul>
+          <li>NK → ценегермин 8 нед.</li>
+          <li>Стойкий дефект → инсулин, АМ, тарзорафия</li>
+          <li>ЛСКН → SLET/CLAU</li>
+          <li>Утечка → конъюнктивальное продвижение</li>
+          <li>Виновата подушка → её ревизия</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="sg-map" class="sg-card">
+    <h2>Эффективность против безопасности для подушки</h2>
+    <p class="sg-muted">Каждый кружок — средства с одинаковыми оценками; число внутри — сколько их. Наведите или нажмите, чтобы увидеть названия. Зелёная зона — эффективно и безопасно (обе оценки ≥ 4).</p>
+    <div class="sg-legend" style="margin:var(--cds-gap-sm) 0">
+      <span style="--sg-c: var(--sg-c1)">Шаги 1–3</span>
+      <span style="--sg-c: var(--sg-c4)">Шаг 4 · по фенотипу</span>
+      <span style="--sg-c: var(--cds-chart-status-critical)">Избегать</span>
+    </div>
+    <div class="sg-chartbox" data-draw="scatter" data-source="interventions"></div>
+  </section>
+
+  <section id="sg-table">
+    <h2>Все средства и оценки агентов</h2>
+    <div class="sg-controls">
+      <label for="sg-filter" class="sg-muted">Показать</label>
+      <select id="sg-filter" class="dash-select" aria-label="Фильтр по шагу">
+        <option value="">Все шаги</option>
+        <option value="1">Шаг 1 · основа</option>
+        <option value="2">Шаг 2 · противовоспалительные</option>
+        <option value="3">Шаг 3 · регенерация</option>
+        <option value="4">Шаг 4 · по фенотипу</option>
+        <option value="x">Избегать</option>
+      </select>
+      <span class="sg-muted">Оценки 1–5, экспертные, по отчётам агентов; «н/д» — данных у пациентов с глаукомой/после ТЭ нет.</span>
+    </div>
+    <div class="sg-tablewrap">
+      <table class="sg-table" data-source="interventions" data-row-key="id">
+        <thead>
+          <tr>
+            <th data-field="intervention">Средство</th>
+            <th data-field="stage">Шаг</th>
+            <th data-field="efficacy">Эффект</th>
+            <th data-field="evidence">Доказ.</th>
+            <th data-field="evidence_trab">Доказ. после ТЭ</th>
+            <th data-field="bleb_safety">Безоп. подушки</th>
+            <th data-field="agents">Агенты</th>
+            <th data-field="pmid">PMID</th>
+            <th data-field="note">Комментарий</th>
+          </tr>
+        </thead>
+        <tbody data-draw="rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="sg-flags" class="sg-flags">
+    <div class="sg-card sg-flag-urgent">
+      <h2>Срочно к глаукоматологу, в тот же день</h2>
+      <ul>
+        <li>Боль, покраснение у подушки, «белая» подушка, отделяемое, клетки или гипопион</li>
+        <li>Впервые положительный Зейдель</li>
+        <li>Гипотония &lt; 6 мм рт. ст. с мелкой камерой</li>
+        <li>ВГД выше цели на стероиде, сыворотке или линзе</li>
+        <li>Инфильтрат, истончение стромы</li>
+        <li>Дефект эпителия не закрылся за 10–14 дней</li>
+      </ul>
+    </div>
+    <div class="sg-card sg-flag-avoid">
+      <h2>Не применять</h2>
+      <ul>
+        <li>Склеральные линзы без клиренса над подушкой</li>
+        <li>LipiFlow; массаж, экспрессия и IPL верхнего века</li>
+        <li>Кольцевой АМ-конформер на зоне подушки</li>
+        <li>НПВС-капли, особенно при NK</li>
+        <li>Стероиды дольше 4 нед. без пересмотра</li>
+        <li>Длительное ношение мягкой КЛ</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="sg-visits" class="sg-card">
+    <h2>График визитов</h2>
+    <div class="sg-tablewrap">
+      <table class="sg-table">
+        <thead><tr><th>Срок</th><th>Что проверить</th></tr></thead>
+        <tbody>
+          <tr><td>Исходно</td><td>Шаг 0 полностью</td></tr>
+          <tr><td>1–2 нед.</td><td>ВГД на стероиде, переносимость циклоспорина; при дефекте эпителия — еженедельно</td></tr>
+          <tr><td>4 нед.</td><td>Отмена стероида; ВГД и подушка, особенно на сыворотке</td></tr>
+          <tr><td>8 нед.</td><td>Решение об эскалации: ответ — Oxford ↓ ≥ 1 ступени (при тяжёлой ↓ ≥ 2), дефект закрыт</td></tr>
+          <tr><td>Далее</td><td>Каждые 4–8 нед., при стабилизации раз в 3 мес.; Зейдель, ВГД и фото подушки на каждом визите</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="sg-votes" class="sg-card">
+    <h2>Как агенты пришли к согласию</h2>
+    <div class="sg-tablewrap">
+      <table class="sg-table" data-source="votes" data-row-key="agent">
+        <thead>
+          <tr>
+            <th data-field="agent">Агент</th>
+            <th data-field="focus">Направление</th>
+            <th data-field="round1_top1">Раунд 1: № 1</th>
+            <th data-field="round2">Раунд 2</th>
+            <th data-field="final">Итог</th>
+          </tr>
+        </thead>
+        <tbody data-draw="votes"></tbody>
+      </table>
+    </div>
+    <details style="margin-top:var(--cds-gap-md)">
+      <summary>Оставшиеся неблокирующие разногласия</summary>
+      <ul>
+        <li>Инсулин при стойком дефекте: A — первая опция, C — резерв. Выбор за врачом.</li>
+        <li>Порог «Ширмер &gt; 10 мм» для отказа от пробок — экспертный.</li>
+        <li>График визитов и критерии ответа — экспертная оценка, прямых данных нет.</li>
+      </ul>
+    </details>
+  </section>
+</div>
+
+<script>
+window.sgStageColor = (step) => step === 'x' ? 'var(--cds-chart-status-critical)' : step === '4' ? dash.colors[3 % dash.colors.length] : dash.colors[0];
+document.querySelectorAll('.sg').forEach((el) => {
+  el.style.setProperty('--sg-c1', dash.colors[0]);
+  el.style.setProperty('--sg-c2', dash.colors[1 % dash.colors.length]);
+  el.style.setProperty('--sg-c3', dash.colors[2 % dash.colors.length]);
+  el.style.setProperty('--sg-c4', dash.colors[3 % dash.colors.length]);
+});
+
+dash.calc('summary', {
+  inputs: ['interventions'],
+  title: 'Сводка по средствам',
+  description: 'Число средств протокола (без «избегать»), из них с безопасностью для подушки ≥ 4, и число методов, которых избегать.',
+  fn: (interventions) => {
+    const use = interventions.filter((r) => r.step !== 'x');
+    return [{
+      total: use.length,
+      safe: use.filter((r) => Number(r.bleb_safety) >= 4).length,
+      avoid: interventions.length - use.length,
+    }];
+  },
+});
+
+['total', 'safe', 'avoid'].forEach((k) => {
+  dash.draw('k-' + k, (el) => {
+    const s = dash.data('summary');
+    el.textContent = s.status === 'ok' && s.data && s.data[0] ? String(s.data[0][k]) : '—';
+  });
+});
+
+const sgFmt = (v) => (v === null || v === undefined || v === '') ? 'н/д' : String(v).replace('.', ',');
+
+document.querySelectorAll('#sg-filter').forEach((sel) => {
+  sel.addEventListener('change', () => dash.draw('rows'));
+});
+
+dash.draw('rows', (tbody) => {
+  const d = dash.data('interventions');
+  tbody.replaceChildren();
+  if (d.status !== 'ok') {
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = 9;
+    td.textContent = d.status === 'error' ? 'Не удалось загрузить таблицу средств.' : 'Загрузка…';
+    tr.appendChild(td); tbody.appendChild(tr);
+    return;
+  }
+  const f = (document.getElementById('sg-filter') || {}).value || '';
+  d.data.filter((r) => !f || r.step === f).forEach((r) => {
+    const tr = document.createElement('tr');
+    tr.dataset.key = r.id;
+    if (r.step === 'x') tr.className = 'sg-avoid';
+    const add = (text, cls) => { const td = document.createElement('td'); if (cls) td.className = cls; td.textContent = text; tr.appendChild(td); return td; };
+    add(r.intervention, 'sg-name');
+    add(r.stage);
+    ['efficacy', 'evidence', 'evidence_trab', 'bleb_safety'].forEach((k) => {
+      const v = r[k];
+      const td = add(sgFmt(v), 'sg-score');
+      if (v !== null && v !== undefined && v !== '') {
+        const n = Number(v);
+        const base = k === 'bleb_safety' ? (n >= 4 ? 'var(--color-ok)' : n >= 3 ? 'var(--color-warn)' : 'var(--color-bad)') : dash.colors[0];
+        td.style.background = `color-mix(in srgb, ${base} ${Math.round(8 + (n - 1) * 8)}%, transparent)`;
+      } else {
+        td.style.color = 'var(--color-fg-muted)';
+      }
+    });
+    add(r.agents);
+    const pm = add('');
+    if (r.pmid && /^\d+$/.test(String(r.pmid))) {
+      const a = document.createElement('a');
+      a.href = 'https://pubmed.ncbi.nlm.nih.gov/' + r.pmid + '/';
+      a.target = '_blank'; a.rel = 'noopener';
+      a.textContent = r.pmid;
+      pm.appendChild(a);
+    } else { pm.textContent = '—'; }
+    add(r.note, 'sg-note');
+    tbody.appendChild(tr);
+  });
+});
+
+dash.draw('votes', (tbody) => {
+  const d = dash.data('votes');
+  tbody.replaceChildren();
+  if (d.status !== 'ok') return;
+  d.data.forEach((r) => {
+    const tr = document.createElement('tr');
+    ['agent', 'focus', 'round1_top1', 'round2', 'final'].forEach((k) => {
+      const td = document.createElement('td');
+      td.textContent = r[k];
+      if (k === 'round2') td.className = /^Не/.test(r[k]) ? 'sg-bad' : '';
+      if (k === 'final') td.className = r[k] === 'ПРИНИМАЮ' ? 'sg-ok' : 'sg-bad';
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+});
+
+dash.draw('scatter', {
+  mount: (el) => {
+    const tip = document.createElement('div');
+    tip.className = 'sg-tip'; tip.hidden = true;
+    el.appendChild(tip);
+    return { tip };
+  },
+  update: (el, made) => {
+    const d = dash.data('interventions');
+    el.querySelectorAll('svg, .sg-msg').forEach((n) => n.remove());
+    if (d.status !== 'ok') {
+      const m = document.createElement('p');
+      m.className = 'sg-muted sg-msg';
+      m.textContent = d.status === 'error' ? 'Не удалось загрузить данные для графика.' : '—';
+      el.appendChild(m);
+      return;
+    }
+    const W = Math.max(280, el.clientWidth), H = 340;
+    const m = { t: 16, r: 16, b: 46, l: 52 };
+    const x = d3.scaleLinear().domain([1.5, 5.5]).range([m.l, W - m.r]);
+    const y = d3.scaleLinear().domain([1.5, 5.5]).range([H - m.b, m.t]);
+    const groups = d3.groups(d.data, (r) => `${r.efficacy}|${r.bleb_safety}|${r.step === 'x' ? 'x' : r.step === '4' ? '4' : 'b'}`)
+      .map(([k, rows]) => ({ k, rows, e: Number(rows[0].efficacy), s: Number(rows[0].bleb_safety), kind: k.split('|')[2] }));
+    // spread groups sharing a coordinate
+    d3.groups(groups, (g) => `${g.e}|${g.s}`).forEach(([, gs]) => gs.forEach((g, i) => { g.dx = (i - (gs.length - 1) / 2) * 26; }));
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('role', 'img').attr('aria-label', 'Точечная диаграмма: эффективность средства по горизонтали, безопасность для фильтрационной подушки по вертикали, шкала 1–5');
+    svg.append('rect').attr('class', 'sg-zone').attr('x', x(3.75)).attr('y', y(5.5)).attr('width', x(5.5) - x(3.75)).attr('height', y(3.75) - y(5.5));
+    const ticks = [2, 3, 4, 5];
+    svg.append('g').attr('class', 'sg-grid').selectAll('line').data(ticks).join('line')
+      .attr('x1', m.l).attr('x2', W - m.r).attr('y1', (t) => y(t)).attr('y2', (t) => y(t));
+    svg.append('g').attr('class', 'sg-axis').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues(ticks).tickSize(4));
+    svg.append('g').attr('class', 'sg-axis').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).tickValues(ticks).tickSize(4));
+    svg.append('text').attr('class', 'sg-axis').attr('x', (m.l + W - m.r) / 2).attr('y', H - 8).attr('text-anchor', 'middle')
+      .style('fill', 'var(--cds-text-secondary)').style('font-size', 'var(--cds-font-size-caption)').text('Эффективность →');
+    svg.append('text').attr('transform', `translate(14,${(m.t + H - m.b) / 2}) rotate(-90)`).attr('text-anchor', 'middle')
+      .style('fill', 'var(--cds-text-secondary)').style('font-size', 'var(--cds-font-size-caption)').text('Безопасность для подушки →');
+    const color = (g) => g.kind === 'x' ? 'var(--cds-chart-status-critical)' : g.kind === '4' ? dash.colors[3 % dash.colors.length] : dash.colors[0];
+    const node = svg.append('g').selectAll('g').data(groups).join('g')
+      .attr('transform', (g) => `translate(${x(g.e) + g.dx},${y(g.s)})`).style('cursor', 'pointer');
+    node.append('circle').attr('r', (g) => 7 + Math.sqrt(g.rows.length) * 4)
+      .style('fill', color).style('fill-opacity', 0.85).style('stroke', 'var(--color-bg)').style('stroke-width', 1.5);
+    node.append('text').attr('text-anchor', 'middle').attr('dy', '0.35em')
+      .style('fill', 'var(--color-bg)').style('font-size', '11px').style('font-weight', 600)
+      .text((g) => g.rows.length);
+    const show = (ev, g) => {
+      const t = made.tip;
+      t.replaceChildren();
+      const h = document.createElement('div');
+      h.textContent = `Эффект ${sgFmt(g.e)} · безопасность ${sgFmt(g.s)}`;
+      h.style.fontWeight = '600';
+      const ul = document.createElement('ul');
+      g.rows.forEach((r) => { const li = document.createElement('li'); li.textContent = r.intervention; ul.appendChild(li); });
+      t.append(h, ul);
+      t.hidden = false;
+      const box = el.getBoundingClientRect();
+      const px = ev.clientX - box.left, py = ev.clientY - box.top;
+      const tw = t.offsetWidth;
+      t.style.left = Math.max(0, Math.min(px + 12, box.width - tw)) + 'px';
+      t.style.top = Math.max(0, py - t.offsetHeight - 10) + 'px';
+    };
+    node.on('mousemove', show).on('click', show).on('mouseleave', () => { made.tip.hidden = true; });
+  },
+});
+</script>
