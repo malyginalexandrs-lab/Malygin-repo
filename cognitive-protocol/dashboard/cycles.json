@@ -1,0 +1,29 @@
+[
+{
+"cycle": 1,
+"new_sources": 62,
+"verified_claims": 26,
+"corrections": 17,
+"heuristics_count": 77,
+"protocol_version": "1.0",
+"protocol_kb": 76.4
+},
+{
+"cycle": 2,
+"new_sources": 76,
+"verified_claims": 21,
+"corrections": 25,
+"heuristics_count": 96,
+"protocol_version": "2.0",
+"protocol_kb": 104.6
+},
+{
+"cycle": 3,
+"new_sources": 60,
+"verified_claims": 30,
+"corrections": 24,
+"heuristics_count": 11,
+"protocol_version": "3.0",
+"protocol_kb": 45.0
+}
+]

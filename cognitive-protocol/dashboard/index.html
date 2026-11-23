@@ -1,0 +1,320 @@
+<meta name="dash-one-writer">
+<style>
+.cp { display: flex; flex-direction: column; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+.cp h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.cp h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; text-wrap: balance; }
+.cp p { margin: 0; max-width: 70ch; line-height: 1.5; }
+.cp .lede { color: var(--color-fg); }
+.cp .muted { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.cp section { display: flex; flex-direction: column; gap: var(--cds-gap-md); min-width: 0; }
+.cp .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--cds-gap-md); }
+.cp .tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-xs); }
+.cp .tile .num { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; }
+.cp .tile .lbl { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.cp .chart { position: relative; min-width: 0; }
+.cp .chart-rank { min-height: 520px; }
+.cp .chart-cycles { min-height: 150px; }
+.cp .chart-levels { min-height: 70px; }
+.cp .chart svg text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); font-family: var(--font-anthropic-sans); }
+.cp .chart svg text.ink { fill: var(--color-fg); }
+.cp .tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); font-size: var(--cds-font-size-caption); max-width: 280px; line-height: 1.4; z-index: 2; }
+.cp .tip .t { font-weight: var(--cds-font-weight-medium); color: var(--color-fg); }
+.cp .tip .s { color: var(--cds-text-secondary); }
+.cp .tablewrap { overflow-x: auto; }
+.cp table { border-collapse: collapse; width: 100%; font-size: var(--cds-font-size-body); }
+.cp th, .cp td { text-align: left; padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+.cp th { font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); white-space: nowrap; }
+.cp td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cp .pill { display: inline-block; padding: 0 6px; border-radius: 999px; font-size: var(--cds-font-size-caption); border: 1px solid var(--color-border-line); white-space: nowrap; }
+.cp .pill.ok { color: var(--color-ok); border-color: var(--color-ok); }
+.cp .pill.warn { color: var(--color-warn); border-color: var(--color-warn); }
+.cp .pill.bad { color: var(--color-bad); border-color: var(--color-bad); }
+.cp .row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--cds-gap-xl); }
+.cp .controls { display: flex; gap: var(--cds-gap-sm); align-items: center; flex-wrap: wrap; }
+.cp details summary { cursor: pointer; color: var(--color-fg-muted); }
+</style>
+
+<div class="cp">
+  <header id="top" style="display:flex;flex-direction:column;gap:var(--cds-gap-sm)">
+    <h1>Когнитивный протокол v3.0</h1>
+    <p class="lede">Ядро протокола — <b data-draw="k-core" data-source="summary" data-field="core" data-row="0">—</b> из <b data-draw="k-total" data-source="summary" data-field="total" data-row="0">—</b> вмешательств, и почти все они бесплатны по времени. Первое место рейтинга «польза / усилие» — <b data-draw="top1" data-source="interventions" data-field="name" data-where="rank=1">—</b>.</p>
+    <p class="muted">Итог 3 циклов работы оркестратора и трёх агентов (исследователь, верификатор, редактор) по данным PubMed. Для здорового взрослого 18–50 лет; не заменяет консультацию врача.</p>
+  </header>
+
+  <section id="kpi">
+    <div class="tiles">
+      <div class="tile"><span class="num" data-draw="t-sources" data-source="summary" data-field="sources" data-row="0">—</span><span class="lbl">источников PubMed за 3 цикла</span></div>
+      <div class="tile"><span class="num" data-draw="t-total" data-source="summary" data-field="total" data-row="0">—</span><span class="lbl">вмешательств оценено</span></div>
+      <div class="tile"><span class="num" data-draw="t-core" data-source="summary" data-field="core" data-row="0">—</span><span class="lbl">пунктов в ядре</span></div>
+      <div class="tile"><span class="num" data-draw="t-min" data-source="summary" data-field="core_minutes" data-row="0">—</span><span class="lbl">мин/день максимум на ядро с мониторингом</span></div>
+    </div>
+  </section>
+
+  <section id="ranking">
+    <h2>Рейтинг вмешательств по пользе на минуту усилия</h2>
+    <p class="muted">Индекс v3 = польза (0–5) × вес уверенности (A 1,0 · A− 0,9 · B 0,7 · B− 0,6 · C 0,4 · D 0,1) / (1 + log₂(1 + мин/день ÷ 5)). Насыщенность полосы — надёжность доказательств, ◆ — пункт ядра. Баллы пользы — экспертная оценка агентов.</p>
+    <div class="chart chart-rank" data-draw="rank" data-source="interventions"></div>
+  </section>
+
+  <div class="row2">
+    <section id="levels">
+      <h2>Доказательность: большинство мер — уровень C или ниже</h2>
+      <p class="muted">Число вмешательств по уровню доказательности для 18–50 лет (A− учтено как A, B− как B).</p>
+      <div class="chart chart-levels" data-draw="levels" data-source="levels"></div>
+    </section>
+    <section id="cycles">
+      <h2>Как менялся протокол по циклам</h2>
+      <p class="muted">К циклу 3 эвристик без источника стало в 9 раз меньше, объём сократился вдвое.</p>
+      <div class="chart chart-cycles" data-draw="cycles" data-source="cycles"></div>
+    </section>
+  </div>
+
+  <section id="core">
+    <h2>Минимальный протокол (ядро)</h2>
+    <div class="tablewrap">
+      <table data-source="minimal" data-row-key="n">
+        <thead><tr><th data-field="n">№</th><th data-field="item">Действие</th><th data-field="minutes_day">Доп. мин/день</th><th data-field="level">Уровень</th><th data-field="part">Часть</th></tr></thead>
+        <tbody data-draw="core-table"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="redteam">
+    <h2>Проверка «красной командой» в цикле 3</h2>
+    <p class="muted">Ни один пункт не опровергнут; ослабленные получили более осторожные формулировки или уровни.</p>
+    <div class="tablewrap">
+      <table data-source="interventions" data-row-key="id">
+        <thead><tr><th data-field="name">Вмешательство</th><th data-field="verdict">Вердикт</th><th data-field="level">Уровень</th><th data-field="effect">Эффект</th></tr></thead>
+        <tbody data-draw="rt-table"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="all">
+    <h2>Все вмешательства</h2>
+    <div class="controls">
+      <label class="muted" for="cp-pillar">Столп</label>
+      <select id="cp-pillar" class="dash-select" data-draw="pillar" aria-label="Столп" data-source="interventions"></select>
+    </div>
+    <div class="tablewrap">
+      <table data-source="interventions" data-row-key="id">
+        <thead><tr><th data-field="rank">Ранг</th><th data-field="name">Вмешательство</th><th data-field="pillar">Столп</th><th data-field="level_18_50">Уровень 18–50</th><th data-field="level_60plus">Уровень 60+</th><th data-field="minutes_day">Мин/день</th><th data-field="index_v3">Индекс</th><th data-field="in_core">Ядро</th><th data-field="pmids">PMID</th></tr></thead>
+        <tbody data-draw="all-table"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="row2">
+    <section id="phases">
+      <h2>Внедрение за 12 недель</h2>
+      <div class="tablewrap">
+        <table data-source="phases" data-row-key="weeks">
+          <thead><tr><th data-field="weeks">Недели</th><th data-field="name">Фаза</th><th data-field="focus">Что вводится</th></tr></thead>
+          <tbody data-draw="phases-table"></tbody>
+        </table>
+      </div>
+    </section>
+    <section id="schedule">
+      <h2>День офисного работника, ранний хронотип</h2>
+      <div class="tablewrap">
+        <table data-source="schedule" data-row-key="time">
+          <thead><tr><th data-field="time">Время</th><th data-field="action">Действие</th></tr></thead>
+          <tbody data-draw="schedule-table"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <section id="metrics">
+    <h2>Метрики и правило остановки</h2>
+    <div class="tablewrap">
+      <table data-source="metrics" data-row-key="name">
+        <thead><tr><th data-field="name">Метрика</th><th data-field="how">Как</th><th data-field="frequency">Частота</th><th data-field="threshold">Порог</th></tr></thead>
+        <tbody data-draw="metrics-table"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <details id="notes">
+    <summary>Ограничения данных</summary>
+    <p class="muted">Поиск шёл только по PubMed (Consensus был недоступен). Большинство цифр проверено по абстрактам, 8 ключевых источников — по полным текстам. Прямых РКИ у здоровых 18–50 лет по силовым тренировкам и свету в реальной среде мало. Полный протокол и источники — в папке cognitive-protocol репозитория.</p>
+  </details>
+</div>
+
+<script>
+dash.calc('summary', {
+  title: 'Сводка протокола',
+  description: 'Число вмешательств, пунктов ядра, источников и минут ядра.',
+  inputs: ['interventions', 'cycles', 'minimal'],
+  fn: (interventions, cycles, minimal) => [{
+    total: interventions.length,
+    core: interventions.filter((r) => r.in_core === 'да').length,
+    sources: cycles.reduce((s, c) => s + Number(c.new_sources), 0),
+    core_minutes: minimal.filter((m) => m.part !== 'база').reduce((s, m) => s + Number(m.minutes_day), 0)
+  }]
+});
+dash.calc('levels', {
+  title: 'Вмешательства по уровню доказательности',
+  description: 'Группировка по первой букве уровня (A− считается A, B− — B).',
+  inputs: ['interventions'],
+  fn: (interventions) => ['A', 'B', 'C', 'D'].map((level) => ({
+    level,
+    count: interventions.filter((r) => String(r.level).charAt(0) === level).length
+  }))
+});
+
+window.cpFmt = (v, digits) => (v === null || v === undefined || v === '') ? '—' : Number(v).toLocaleString('ru-RU', {maximumFractionDigits: digits ?? 2});
+window.cpPillar = '';
+
+function cpNum(name, field, digits) {
+  dash.draw(name, (el) => {
+    const s = dash.data('summary');
+    if (el.classList.contains('dash-skeleton') && s.status !== 'loading') el.classList.remove('dash-skeleton');
+    el.textContent = (s.status === 'ok' && s.data && s.data[0]) ? cpFmt(s.data[0][field], digits) : '—';
+  });
+}
+cpNum('k-core', 'core'); cpNum('k-total', 'total'); cpNum('t-sources', 'sources');
+cpNum('t-total', 'total'); cpNum('t-core', 'core'); cpNum('t-min', 'core_minutes', 1);
+
+dash.draw('top1', (el) => {
+  const d = dash.data('interventions');
+  const r = d.status === 'ok' ? d.data.find((x) => Number(x.rank) === 1) : null;
+  el.textContent = r ? r.name : '—';
+});
+
+window.cpTable = (el, source, cols, filter) => {
+  const d = dash.data(source);
+  if (d.status === 'error') { el.replaceChildren(); const tr = el.insertRow(); const td = tr.insertCell(); td.colSpan = cols.length; td.textContent = 'Не удалось загрузить данные.'; return; }
+  if (d.status !== 'ok') { el.replaceChildren(); return; }
+  const rows = filter ? d.data.filter(filter) : d.data;
+  el.replaceChildren(...rows.map((r) => {
+    const tr = document.createElement('tr');
+    cols.forEach((c) => {
+      const td = document.createElement('td');
+      const v = r[c.f];
+      if (c.pill) { const sp = document.createElement('span'); sp.className = 'pill ' + (c.pill(v) || ''); sp.textContent = v ?? '—'; td.append(sp); }
+      else td.textContent = c.fmt ? c.fmt(v) : (v ?? '—');
+      if (c.num) td.className = 'n';
+      tr.append(td);
+    });
+    return tr;
+  }));
+};
+const cpVerdict = (v) => v === 'устоял' ? 'ok' : v === 'ослаблен' ? 'warn' : v === 'опровергнут' ? 'bad' : '';
+
+dash.draw('core-table', (el) => cpTable(el, 'minimal', [
+  {f: 'n', num: true}, {f: 'item'}, {f: 'minutes_day', num: true, fmt: (v) => cpFmt(v, 1)}, {f: 'level'}, {f: 'part'}
+]));
+dash.draw('rt-table', (el) => cpTable(el, 'interventions', [
+  {f: 'name'}, {f: 'verdict', pill: cpVerdict}, {f: 'level'}, {f: 'effect'}
+], (r) => r.verdict !== 'не проверялся'));
+dash.draw('phases-table', (el) => cpTable(el, 'phases', [{f: 'weeks', num: true}, {f: 'name'}, {f: 'focus'}]));
+dash.draw('schedule-table', (el) => cpTable(el, 'schedule', [{f: 'time', num: true}, {f: 'action'}]));
+dash.draw('metrics-table', (el) => cpTable(el, 'metrics', [{f: 'name'}, {f: 'how'}, {f: 'frequency'}, {f: 'threshold'}]));
+
+dash.draw('pillar', (sel) => {
+  const d = dash.data('interventions');
+  const pillars = d.status === 'ok' ? [...new Set(d.data.map((r) => r.pillar))] : [];
+  sel.replaceChildren(new Option('Все столпы', ''), ...pillars.map((p) => new Option(p, p)));
+  sel.value = window.cpPillar;
+  sel.onchange = () => { window.cpPillar = sel.value; dash.draw('all-table'); };
+});
+dash.draw('all-table', (el) => {
+  cpTable(el, 'interventions', [
+    {f: 'rank', num: true}, {f: 'name'}, {f: 'pillar'}, {f: 'level_18_50'}, {f: 'level_60plus'},
+    {f: 'minutes_day', num: true}, {f: 'index_v3', num: true, fmt: (v) => cpFmt(v, 2)}, {f: 'in_core'}, {f: 'pmids'}
+  ], (r) => !window.cpPillar || r.pillar === window.cpPillar);
+});
+
+dash.draw('rank', (el) => {
+  const d = dash.data('interventions');
+  if (d.status === 'error') { el.textContent = 'Рейтинг не загрузился.'; return; }
+  if (d.status !== 'ok') { el.textContent = '—'; return; }
+  const rows = d.data.filter((r) => r.rank !== null && r.rank !== undefined && r.rank !== '' && Number(r.rank) <= 20)
+    .sort((a, b) => Number(b.index_v3) - Number(a.index_v3));
+  el.replaceChildren();
+  const W = Math.max(300, el.clientWidth), rowH = 24, top = 8, H = top + rows.length * rowH + 8;
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`)
+    .attr('role', 'img').attr('aria-label', 'Рейтинг 20 вмешательств по индексу польза на минуту усилия');
+  const narrow = W < 560;
+  const labelW = narrow ? Math.min(190, W * 0.48) : Math.min(340, W * 0.42);
+  const maxChars = Math.floor(labelW / 6.6);
+  const x = d3.scaleLinear().domain([0, d3.max(rows, (r) => Number(r.index_v3))]).range([labelW + 8, W - 64]);
+  const g = svg.selectAll('g.r').data(rows, (r) => r.id).join('g').attr('class', 'r')
+    .attr('transform', (r, i) => `translate(0, ${top + i * rowH})`);
+  g.append('text').attr('class', 'ink').attr('x', labelW).attr('y', rowH / 2 + 4).attr('text-anchor', 'end')
+    .text((r) => { const n = (r.in_core === 'да' ? '◆ ' : '') + r.name; return n.length > maxChars ? n.slice(0, maxChars - 1) + '…' : n; });
+  g.append('rect').attr('x', x(0)).attr('y', 4).attr('height', rowH - 8).attr('rx', 3)
+    .attr('width', (r) => Math.max(1, x(Number(r.index_v3)) - x(0)))
+    .style('fill', dash.colors[0]).style('fill-opacity', (r) => 0.25 + 0.75 * Number(r.weight))
+    .attr('data-source', 'interventions').attr('data-field', 'index_v3').attr('data-where', (r) => 'id=' + encodeURIComponent(r.id));
+  g.append('text').attr('x', (r) => x(Number(r.index_v3)) + 6).attr('y', rowH / 2 + 4)
+    .text((r) => cpFmt(r.index_v3, 2) + ' · ' + r.level);
+  const tip = d3.select(el).append('div').attr('class', 'tip').style('display', 'none');
+  g.append('rect').attr('x', 0).attr('y', 0).attr('width', W).attr('height', rowH).style('fill', 'transparent')
+    .on('pointerenter pointermove', (ev, r) => {
+      const [mx, my] = d3.pointer(ev, el);
+      tip.style('display', null);
+      tip.selectAll('*').remove();
+      tip.append('div').attr('class', 't').text(r.name);
+      tip.append('div').attr('class', 's').text(`Индекс ${cpFmt(r.index_v3, 2)} · уровень ${r.level} · ${cpFmt(r.minutes_day)} мин/день`);
+      tip.append('div').attr('class', 's').text(r.effect);
+      tip.append('div').attr('class', 's').text('Красная команда: ' + r.verdict);
+      const tw = 280, left = Math.min(Math.max(0, mx + 12), Math.max(0, el.clientWidth - tw));
+      tip.style('left', left + 'px').style('top', (my + 14) + 'px');
+    })
+    .on('pointerleave', () => tip.style('display', 'none'));
+});
+
+dash.draw('levels', (el) => {
+  const d = dash.data('levels');
+  if (d.status === 'error') { el.textContent = 'Не загрузилось.'; return; }
+  if (d.status !== 'ok' || !d.data) { el.textContent = '—'; return; }
+  el.replaceChildren();
+  const rows = d.data, total = d3.sum(rows, (r) => r.count);
+  const W = Math.max(280, el.clientWidth), H = 64;
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`)
+    .attr('role', 'img').attr('aria-label', 'Распределение вмешательств по уровням доказательности');
+  const x = d3.scaleLinear().domain([0, total]).range([0, W]);
+  let acc = 0;
+  const op = {A: 1, B: 0.7, C: 0.45, D: 0.2};
+  rows.forEach((r) => {
+    const x0 = x(acc), w = x(r.count); acc += r.count;
+    svg.append('rect').attr('x', x0 + 1).attr('y', 4).attr('width', Math.max(0, w - 2)).attr('height', 30).attr('rx', 3)
+      .style('fill', dash.colors[0]).style('fill-opacity', op[r.level])
+      .attr('data-source', 'levels').attr('data-field', 'count').attr('data-where', 'level=' + r.level);
+    svg.append('text').attr('class', 'ink').attr('x', x0 + 6).attr('y', 54).text(`${r.level}: ${r.count}`);
+  });
+});
+
+dash.draw('cycles', (el) => {
+  const d = dash.data('cycles');
+  if (d.status === 'error') { el.textContent = 'Не загрузилось.'; return; }
+  if (d.status !== 'ok') { el.textContent = '—'; return; }
+  el.replaceChildren();
+  const rows = d.data;
+  const metrics = [
+    {f: 'new_sources', t: 'Новые источники'}, {f: 'corrections', t: 'Правки'},
+    {f: 'heuristics_count', t: 'Эвристики ⚙'}, {f: 'protocol_kb', t: 'Объём, КБ'}
+  ];
+  const W = Math.max(280, el.clientWidth), cols = W < 420 ? 2 : 4, cw = W / cols, ch = 120, H = Math.ceil(metrics.length / cols) * ch;
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`)
+    .attr('role', 'img').attr('aria-label', 'Показатели протокола по трём циклам');
+  metrics.forEach((m, i) => {
+    const gx = (i % cols) * cw, gy = Math.floor(i / cols) * ch;
+    const g = svg.append('g').attr('transform', `translate(${gx},${gy})`);
+    g.append('text').attr('class', 'ink').attr('x', 4).attr('y', 14).text(m.t);
+    const max = d3.max(rows, (r) => Number(r[m.f]));
+    const bw = (cw - 24) / rows.length;
+    const y = d3.scaleLinear().domain([0, max]).range([0, ch - 58]);
+    rows.forEach((r, j) => {
+      const v = Number(r[m.f]), h = y(v), bx = 4 + j * bw, by = ch - 22 - h;
+      g.append('rect').attr('x', bx + 3).attr('y', by).attr('width', bw - 6).attr('height', h).attr('rx', 2)
+        .style('fill', dash.colors[0]).style('fill-opacity', j === rows.length - 1 ? 1 : 0.45)
+        .attr('data-source', 'cycles').attr('data-field', m.f).attr('data-row', j);
+      g.append('text').attr('x', bx + bw / 2).attr('y', by - 4).attr('text-anchor', 'middle').text(cpFmt(v, 1));
+      g.append('text').attr('x', bx + bw / 2).attr('y', ch - 8).attr('text-anchor', 'middle').text('ц' + r.cycle);
+    });
+  });
+});
+</script>
